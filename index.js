@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
+const express = require('express');
 
+const app = express();
 const client = new Discord.Client();
 
 const waiterCommand = require('./commands/waiter.js');
@@ -51,3 +53,8 @@ client.on('message', (message) => {
 });
 
 client.login(config.token);
+// Fix for Heroku Free Dyno
+const port = process.env.PORT || 3000;
+app.listen(port, '0.0.0.0', () => {
+  console.log('Listening on Port 3000');
+});
