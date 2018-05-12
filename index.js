@@ -9,6 +9,7 @@ const config = require('./config.json');
 
 let mode = 'Jarvis';
 client.on('ready', () => {
+  console.log('Jarvis started');
   client.user.setActivity('Assistant Discord');
 });
 
