@@ -1,2 +1,2 @@
 # JarvisBot
-A prottoype Discord bot, just for fun
+A prototype Discord bot, just for fun
