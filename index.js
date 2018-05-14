@@ -44,7 +44,9 @@ const processMessage = (message) => {
 
 client.on('message', (message) => {
   if (message.author.bot) return;
-  if (message.content.toLowerCase() === '/nd') {
+  if (message.content.toLowerCase() === '/nidecerf') {
+    message.reply("Tu peux m'appeler /nd maintenant");
+  } else if (message.content.toLowerCase() === '/nd') {
     switchToNidecerf(message);
   } else if (message.content.toLowerCase() === '/jarvis') {
     switchToJarvis(message);

@@ -1,35 +1,4 @@
-const randomAnswers = [
-  'Merci',
-  "Il y aura bientôt un nouvel organigramme, je ne sais pas ce qu'on me réserve...",
-  "Tu as l'âme d'un B1 Rebel",
-];
-
-const xperthisAnswers = [
-  "Ce n'est pas une matrice, c'est plutôt un tableau à deux dimensions",
-  'Allez courage, plus que 10 ans a stabiliser EPR',
-  "Dans mon coeur tu as toujours été plus haut dans l'organigramme",
-];
-
-const cedricAnswers = [
-  "Tu penses qu'on devrait demander l'avis de Cédric?",
-  "Rien que d'entendre ce nom, je suis tout emoustillé",
-  'Je trouve que Cédric nous a quand même bien aidé !',
-];
-
-const knownCommands = [
-  {
-    command: '/nd help',
-    info: 'Affiche la liste des commandes',
-  },
-  {
-    command: '/nd rate [valeur]',
-    info: 'Définit le taux de réponse en %',
-  },
-  {
-    command: '/nd unmute',
-    info: 'Reactive le bot',
-  },
-];
+const answers = require('./nidecerf_answers');
 
 let rate = 10;
 let mute = false;
@@ -41,7 +10,7 @@ const setRate = (message, newRate) => {
 
 const printUsage = (message) => {
   const fields = [];
-  knownCommands.forEach((action) => {
+  answers.knownCommands.forEach((action) => {
     fields.push({
       name: action.command,
       value: action.info,
@@ -70,9 +39,7 @@ const muteBot = (message) => {
 };
 
 const processAdminCommand = (client, message) => {
-  console.log('Admin command ', message.content);
   const commands = message.content.split(' ');
-  console.log(commands);
   if (commands.length > 1) {
     if (commands[0] === '/nd') {
       if (commands[1].toLowerCase() === 'rate') {
@@ -94,17 +61,16 @@ const processAdminCommand = (client, message) => {
   printUsage(message);
 };
 
-const sometimesReplyMessage = (message, answers, overrideRate) => {
+const sometimesReplyMessage = (message, possibleAnswers, overrideRate) => {
   const random = Math.floor(Math.random() * 100);
   if (random < (overrideRate || rate)) {
-    const index = Math.floor(Math.random() * answers.length);
-    message.reply(answers[index]);
+    const index = Math.floor(Math.random() * possibleAnswers.length);
+    message.reply(possibleAnswers[index]);
   }
 };
 
 // Main method
 exports.process = (client, message) => {
-<<<<<<< HEAD
   if (message.content.toLowerCase().startsWith('/nd')) {
     processAdminCommand(client, message);
   } else if (!mute) {
@@ -116,27 +82,14 @@ exports.process = (client, message) => {
     } else if (message.content.toLowerCase().startsWith('/nd')) {
       processAdminCommand(client, message);
     } else if (message.content.toLowerCase().indexOf('xperthis') > -1) {
-      sometimesReplyMessage(message, xperthisAnswers, 100);
+      sometimesReplyMessage(message, answers.xperthisAnswers, 100);
     } else if (
       message.content.toLowerCase().indexOf('cedric') > -1 ||
       message.content.toLowerCase().indexOf('cédric') > -1
     ) {
-      sometimesReplyMessage(message, cedricAnswers, 100);
+      sometimesReplyMessage(message, answers.cedricAnswers, 100);
     } else {
-      sometimesReplyMessage(message, randomAnswers);
-=======
-  if (message.content.toLowerCase().indexOf('ta gueule nico') > -1 || message.content.toLowerCase().indexOf('nico ta gueule') > -1) {
-    message.reply("Ok, je parlerai moins... de toute façon plus personne ne m'écoute");
-    rate /= 2;
-    console.log(`Rate is now ${rate}`);
-  } else if (message.content.toLowerCase().startsWith('/nidecerf')) {
-    processAdminCommand(client, message);
-  } else {
-    const random = Math.floor(Math.random() * 100);
-    if (random <= rate) {
-      const index = Math.floor(Math.random() * randomAnswers.length);
-      message.reply(randomAnswers[index]);
->>>>>>> 804180f02c3a5809615669f725ad6c5977eb828f
+      sometimesReplyMessage(message, answers.randomAnswers);
     }
   }
 };
