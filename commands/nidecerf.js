@@ -70,7 +70,9 @@ const muteBot = (message) => {
 };
 
 const processAdminCommand = (client, message) => {
+  console.log('Admin command ', message.content);
   const commands = message.content.split(' ');
+  console.log(commands);
   if (commands.length > 1) {
     if (commands[0] === '/nd') {
       if (commands[1].toLowerCase() === 'rate') {
@@ -102,6 +104,7 @@ const sometimesReplyMessage = (message, answers, overrideRate) => {
 
 // Main method
 exports.process = (client, message) => {
+<<<<<<< HEAD
   if (message.content.toLowerCase().startsWith('/nd')) {
     processAdminCommand(client, message);
   } else if (!mute) {
@@ -121,6 +124,19 @@ exports.process = (client, message) => {
       sometimesReplyMessage(message, cedricAnswers, 100);
     } else {
       sometimesReplyMessage(message, randomAnswers);
+=======
+  if (message.content.toLowerCase().indexOf('ta gueule nico') > -1 || message.content.toLowerCase().indexOf('nico ta gueule') > -1) {
+    message.reply("Ok, je parlerai moins... de toute façon plus personne ne m'écoute");
+    rate /= 2;
+    console.log(`Rate is now ${rate}`);
+  } else if (message.content.toLowerCase().startsWith('/nidecerf')) {
+    processAdminCommand(client, message);
+  } else {
+    const random = Math.floor(Math.random() * 100);
+    if (random <= rate) {
+      const index = Math.floor(Math.random() * randomAnswers.length);
+      message.reply(randomAnswers[index]);
+>>>>>>> 804180f02c3a5809615669f725ad6c5977eb828f
     }
   }
 };
