@@ -1,7 +1,5 @@
 const Discord = require('discord.js');
-const express = require('express');
 
-const app = express();
 const client = new Discord.Client();
 
 const waiterCommand = require('./commands/waiter.js');
@@ -9,17 +7,15 @@ const nidecerfCommand = require('./commands/nidecerf.js');
 
 const config = require('./config.json');
 
-let mode = 'Jarvis';
-client.on('ready', () => {
-  console.log('Jarvis started');
-  client.user.setActivity('Assistant Discord');
-});
+let mode = '';
 
 const switchToNidecerf = (message) => {
   mode = 'Nidecerf';
   client.user.setActivity("Chuter dans l'organigramme");
   client.user.setUsername('Nicolas Decerf');
-  message.reply('je suis prêt à sauver EPR');
+  if (message) {
+    message.reply('je suis prêt à sauver EPR');
+  }
 };
 
 const switchToJarvis = (message) => {
@@ -28,6 +24,11 @@ const switchToJarvis = (message) => {
   client.user.setUsername('Jarvis');
   message.reply('je suis à vos ordres');
 };
+
+client.on('ready', () => {
+  console.log('Jarvis started');
+  switchToNidecerf();
+});
 
 const processMessage = (message) => {
   try {
@@ -43,7 +44,7 @@ const processMessage = (message) => {
 
 client.on('message', (message) => {
   if (message.author.bot) return;
-  if (message.content.toLowerCase() === '/nidecerf') {
+  if (message.content.toLowerCase() === '/nd') {
     switchToNidecerf(message);
   } else if (message.content.toLowerCase() === '/jarvis') {
     switchToJarvis(message);
@@ -53,8 +54,3 @@ client.on('message', (message) => {
 });
 
 client.login(config.token);
-// Fix for Heroku Free Dyno
-const port = process.env.PORT || 3000;
-app.listen(port, '0.0.0.0', () => {
-  console.log('Listening on Port 3000');
-});
