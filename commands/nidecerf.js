@@ -13,7 +13,7 @@ let rate = 10;
 const processAdminCommand = (client, message) => {
   console.log('Admin command ', message.content);
   const commands = message.content.split(' ');
-  console.log(commands');
+  console.log(commands);
   if (commands.length > 1) {
     if (commands.length === 3 && commands[1].toLowerCase === 'rate') {
       rate = Number(commands[2]);
