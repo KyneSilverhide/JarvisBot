@@ -11,7 +11,9 @@ const randomAnswers = [
 let rate = 10;
 
 const processAdminCommand = (client, message) => {
+  console.log('Admin command ', message.content);
   const commands = message.content.split(' ');
+  console.log(commands');
   if (commands.length > 1) {
     if (commands.length === 3 && commands[1].toLowerCase === 'rate') {
       rate = Number(commands[2]);
@@ -22,7 +24,7 @@ const processAdminCommand = (client, message) => {
 };
 
 exports.process = (client, message) => {
-  if (message.content.toLowerCase().indexOf('ta gueule nico') > -1) {
+  if (message.content.toLowerCase().indexOf('ta gueule nico') > -1 || message.content.toLowerCase().indexOf('nico ta gueule') > -1) {
     message.reply("Ok, je parlerai moins... de toute façon plus personne ne m'écoute");
     rate /= 2;
     console.log(`Rate is now ${rate}`);
