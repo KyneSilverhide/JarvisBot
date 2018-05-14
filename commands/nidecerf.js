@@ -16,6 +16,7 @@ const processAdminCommand = (client, message) => {
     if (commands.length === 3 && commands[1].toLowerCase === 'rate') {
       rate = Number(commands[2]);
       message.reply(`Je donnerai mon avis sur ${rate}% des messages`);
+      console.log(`Rate is now ${rate}`);
     }
   }
 };
@@ -29,7 +30,7 @@ exports.process = (client, message) => {
     processAdminCommand(client, message);
   } else {
     const random = Math.floor(Math.random() * 100);
-    if (random < rate) {
+    if (random <= rate) {
       const index = Math.floor(Math.random() * randomAnswers.length);
       message.reply(randomAnswers[index]);
     }
