@@ -88,6 +88,8 @@ exports.process = (client, message) => {
       message.content.toLowerCase().indexOf('cédric') > -1
     ) {
       sometimesReplyMessage(message, answers.cedricAnswers, 100);
+    } else if(message.content.toLowerCase().indexOf('hein nico ?') > -1) {
+      sometimesReplyMessage(message, ['Oui maitre !'], 100);
     } else {
       sometimesReplyMessage(message, answers.randomAnswers);
     }
