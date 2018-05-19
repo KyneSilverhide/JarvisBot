@@ -5,8 +5,6 @@ const client = new Discord.Client();
 const waiterCommand = require('./commands/waiter.js');
 const nidecerfCommand = require('./commands/nidecerf.js');
 
-const config = require('./config.json');
-
 let mode = '';
 
 const switchToNidecerf = (message) => {
