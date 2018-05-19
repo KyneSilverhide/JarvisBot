@@ -53,4 +53,5 @@ client.on('message', (message) => {
   }
 });
 
-client.login(process.env.JSON_TOKEN);
+console.log(`TOKEN : ${ process.env.BOT_TOKEN}`)
+client.login(process.env.BOT_TOKEN);

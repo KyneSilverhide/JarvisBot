@@ -28,12 +28,10 @@ const muteBot = (message) => {
   mute = true;
   message.reply("Ok, je me tais. De toute facon personne ne m'écoute", {
     embed: {
-      fields: [
-        {
-          name: '/nd unmute',
-          value: 'Réactive les réponses',
-        },
-      ],
+      fields: [{
+        name: '/nd unmute',
+        value: 'Réactive les réponses',
+      }],
     },
   });
 };
@@ -88,7 +86,7 @@ exports.process = (client, message) => {
       message.content.toLowerCase().indexOf('cédric') > -1
     ) {
       sometimesReplyMessage(message, answers.cedricAnswers, 100);
-    } else if(message.content.toLowerCase().indexOf('hein nico ?') > -1) {
+    } else if (message.content.toLowerCase().indexOf('hein nico ?') > -1) {
       sometimesReplyMessage(message, ['Oui maitre !'], 100);
     } else {
       sometimesReplyMessage(message, answers.randomAnswers);
